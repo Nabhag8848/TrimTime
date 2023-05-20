@@ -3,10 +3,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 class Database {
-  constructor() {
-    this._connect();
-  }
-
   _connect() {
     mongoose
       .connect(`${process.env.MONGO_URL}`)

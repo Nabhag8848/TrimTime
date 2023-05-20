@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { IUser } from "../../types/user";
+import { IUser } from "../../../types/user";
 
 const customerSchema = new Schema({
   id: { type: String, required: true, unique: true },
@@ -14,4 +14,4 @@ const customerSchema = new Schema({
   },
 });
 
-export default mongoose.model<IUser>("Customer", customerSchema);
+export const Customer = mongoose.model<IUser>("Customer", customerSchema);

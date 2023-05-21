@@ -38,9 +38,8 @@ class _BarberLoginPageState extends State<BarberLoginPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                // if (mounted) {
-                //   Navigator.pushReplacementNamed(context, Routes.homeRoute);
-                // }
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.barberHomeRoute, (route) => false);
               },
               child: const Text("Login"),
             ),

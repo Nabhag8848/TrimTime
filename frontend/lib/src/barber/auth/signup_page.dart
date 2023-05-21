@@ -20,23 +20,23 @@ class _BarberSignUpPageState extends State<BarberSignUpPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Barber SignUp"),
+        title: const Text("Barber Sign Up"),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 40),
+            const Text(
+              "Basic Details",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 10),
             TextField(
               onChanged: (e) => userName = e.trim(),
               decoration: const InputDecoration(
                 hintText: "Your Name",
-              ),
-            ),
-            TextField(
-              onChanged: (e) => shopName = e.trim(),
-              decoration: const InputDecoration(
-                hintText: "Shop Name",
               ),
             ),
             TextField(
@@ -46,9 +46,33 @@ class _BarberSignUpPageState extends State<BarberSignUpPage> {
               ),
             ),
             TextField(
+              onChanged: (e) => email = e.trim(),
+              decoration: const InputDecoration(
+                hintText: "Phone",
+              ),
+            ),
+            TextField(
               onChanged: (e) => password = e.trim(),
               decoration: const InputDecoration(
                 hintText: "Password",
+              ),
+            ),
+            const SizedBox(height: 30),
+            const Text(
+              "Shop Details",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 10),
+            TextField(
+              onChanged: (e) => shopName = e.trim(),
+              decoration: const InputDecoration(
+                hintText: "Shop Name",
+              ),
+            ),
+            TextField(
+              onChanged: (e) => shopName = e.trim(),
+              decoration: const InputDecoration(
+                hintText: "Shop Address",
               ),
             ),
             Row(
@@ -87,21 +111,27 @@ class _BarberSignUpPageState extends State<BarberSignUpPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async {
-                // if ( mounted) {
-                //   Navigator.pushReplacementNamed(context, Routes.homeRoute);
-                // }
-              },
-              child: const Text("Sign up"),
+            const SizedBox(height: 50),
+            Center(
+              child: ElevatedButton(
+                onPressed: () async {
+                  Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.barberHomeRoute,
+                    (route) => false,
+                  );
+                },
+                child: const Text("Sign Up"),
+              ),
             ),
-            const SizedBox(height: 40),
-            OutlinedButton(
-              onPressed: () {
-                // Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
-              },
-              child: const Text("Don't have an account? Login"),
+            const SizedBox(height: 20),
+            Center(
+              child: OutlinedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushReplacementNamed(Routes.barberLoginRoute);
+                },
+                child: const Text("Don't have an account? Login"),
+              ),
             ),
           ],
         ),

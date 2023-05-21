@@ -12,3 +12,11 @@ void showToast(String message) {
     fontSize: 16.0,
   );
 }
+
+getHeight(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}
+
+getWidth(BuildContext context) {
+  return MediaQuery.of(context).size.width;
+}

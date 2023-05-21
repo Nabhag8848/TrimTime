@@ -42,21 +42,26 @@ class _MapsPageState extends State<MapsPage> {
       ),
       body: LoadingWidget(
         isLoading: _mapService.isLoading,
-        child: GoogleMap(
-          markers: _mapService.markers,
-          onTap: (argument) {
-            _mapService.addMarker(DateTime.now().toIso8601String(), argument);
-            setState(() {});
-          },
-          myLocationEnabled: true,
-          myLocationButtonEnabled: true,
-          zoomControlsEnabled: false,
-          // mapType: MapType.hybrid,
-          initialCameraPosition: _mapService.kGooglePlex,
-          onMapCreated: (GoogleMapController controller) {
-            _mapService.initController(controller);
-          },
-        ),
+        child: ValueListenableBuilder(
+            valueListenable: _mapService.markers,
+            builder: (context, data, _) {
+              return GoogleMap(
+                markers: data,
+                onTap: (argument) {
+                  print("Adding Marker");
+                  _mapService.addMarker(
+                      DateTime.now().toIso8601String(), argument);
+                },
+                myLocationEnabled: true,
+                myLocationButtonEnabled: true,
+                zoomControlsEnabled: true,
+                zoomGesturesEnabled: true,
+                initialCameraPosition: _mapService.initialLocation,
+                onMapCreated: (GoogleMapController controller) {
+                  _mapService.initController(controller);
+                },
+              );
+            }),
       ),
     );
   }

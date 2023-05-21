@@ -15,8 +15,9 @@ class MyApp extends StatelessWidget {
       title: 'TrimTime',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: Colors.orange,
           brightness: Brightness.dark,
+
         ),
         fontFamily: GoogleFonts.inter().fontFamily,
         useMaterial3: true,

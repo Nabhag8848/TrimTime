@@ -1,4 +1,4 @@
-![banner](https://github.com/Nabhag8848/TrimTime/assets/37607224/261fb491-e3c0-439c-a715-209d1fb2b883)
+![banner](./screenshots/banner.png)
 
 ## Inspiration 💡
 
@@ -30,3 +30,7 @@ We built the application using a robust tech stack:
 
 - Moving forward, we plan to enhance the application by integrating online payment options, implementing geolocation-based search for nearby barbershops, and creating a comprehensive analytics dashboard for barbershop owners. Our goal is to expand our user base, onboard more barbershops, and establish ourselves as the go-to platform for hassle-free haircut bookings.
 
+## Screenshots
+
+![Screenshot1](./screenshots/screenshot_1.png)
+![Screenshot2](./screenshots/screenshot_2.png)

@@ -19,35 +19,30 @@ class _LoadingWidgetState extends State<LoadingWidget> {
         return Stack(
           children: [
             Positioned.fill(
-              child: AbsorbPointer(
-                absorbing: value,
+              child: widget.child,
+            ),
+            if (value)
+              Positioned.fill(
                 child: Opacity(
-                  opacity: value ? 0.25 : 1.0,
-                  child: widget.child,
+                  opacity: value ? 0.2 : 0.0,
+                  child: Container(
+                    color: Colors.white,
+                  ),
                 ),
               ),
-            ),
-            Positioned.fill(
-              child: Opacity(
-                opacity: value ? 1.0 : 0.0,
-                child: Container(
-                  color: Colors.white54,
-                  child: const Center(child: CircularProgressIndicator()),
-                ),
-              ),
-            ),
-            Positioned.fill(
-              child: Opacity(
-                opacity: value ? 1.0 : 0.0,
-                child: Center(
-                  child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      Theme.of(context).primaryColor,
+            if (value)
+              Positioned.fill(
+                child: Opacity(
+                  opacity: value ? 1.0 : 0.0,
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        Theme.of(context).primaryColor,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
           ],
         );
       },

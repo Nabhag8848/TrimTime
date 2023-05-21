@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/routes.dart';
 
 class CustomerSignUpPage extends StatefulWidget {
   const CustomerSignUpPage({super.key});
@@ -8,7 +9,7 @@ class CustomerSignUpPage extends StatefulWidget {
 }
 
 class _CustomerSignUpPageState extends State<CustomerSignUpPage> {
-  String email = "", password = "";
+  String username = "", email = "", password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +24,19 @@ class _CustomerSignUpPageState extends State<CustomerSignUpPage> {
           children: [
             const Spacer(),
             TextField(
-              onChanged: (e) => email = e,
+              decoration: const InputDecoration(
+                hintText: "Username",
+              ),
+              onChanged: (e) => username = e.trim(),
+            ),
+            TextField(
+              onChanged: (e) => email = e.trim(),
               decoration: const InputDecoration(
                 hintText: "Email",
               ),
             ),
             TextField(
-              onChanged: (e) => password = e,
+              onChanged: (e) => password = e.trim(),
               decoration: const InputDecoration(
                 hintText: "Password",
               ),
@@ -37,16 +44,16 @@ class _CustomerSignUpPageState extends State<CustomerSignUpPage> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                // if ( mounted) {
-                //   Navigator.pushReplacementNamed(context, Routes.homeRoute);
-                // }
+                Navigator.pushNamedAndRemoveUntil(
+                    context, Routes.customerHomeRoute, (route) => false);
               },
               child: const Text("Sign up"),
             ),
             const SizedBox(height: 40),
             OutlinedButton(
               onPressed: () {
-                // Navigator.of(context).pushReplacementNamed(Routes.loginRoute);
+                Navigator.pushReplacementNamed(
+                    context, Routes.customerLoginRoute);
               },
               child: const Text("Don't have an account? Login"),
             ),

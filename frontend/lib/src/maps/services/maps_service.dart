@@ -7,18 +7,20 @@ import 'package:logger/logger.dart';
 class MapService {
   late BuildContext context;
   final Logger _logger = Logger();
-  Set<Marker> markers = {};
+
+  ValueNotifier<Set<Marker>> markers = ValueNotifier({});
   ValueNotifier<bool> isLoading = ValueNotifier(true);
-
-  MapService(this.context);
-
+  
   GoogleMapController? _controller;
-  final CameraPosition kGooglePlex = const CameraPosition(
+  CameraPosition initialLocation = const CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    zoom: 15,
   );
 
-  Position? currentPosition;
+  LatLng? _selectedLocation;
+  MapService(this.context);
+
+  MapService.initial(this.context, this.initialLocation);
 
   initController(GoogleMapController controller) {
     _controller = controller;
@@ -64,42 +66,44 @@ class MapService {
     var position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
-    currentPosition = position;
+    _selectedLocation = LatLng(position.latitude, position.longitude);
     _logger.i("Got current user information", position);
 
-    _controller!.animateCamera(CameraUpdate.newCameraPosition(
-      CameraPosition(
-        zoom: 15,
-        target: LatLng(
-          currentPosition!.latitude,
-          currentPosition!.longitude,
-        ),
-      ),
-    ));
+    moveCameraToPosition(_selectedLocation!);
 
-    addMarker("CurrentLocation", LatLng(position.latitude, position.longitude));
+    addMarker("CurrentLocation", _selectedLocation!);
 
     isLoading.value = false;
   }
 
   void addMarker(String id, LatLng location) {
-    markers.add(Marker(markerId: MarkerId(id), position: location));
+    _selectedLocation = location;
+    markers.value = {(Marker(markerId: MarkerId(id), position: location))};
+  }
+
+  void moveCameraToPosition(LatLng pos) {
+    _controller!.animateCamera(CameraUpdate.newCameraPosition(
+      CameraPosition(
+        zoom: 15,
+        target: LatLng(pos.latitude, pos.longitude),
+      ),
+    ));
   }
 
   getCurrentLat() {
-    if (currentPosition == null) {
-      return kGooglePlex.target.latitude;
+    if (_selectedLocation == null) {
+      return initialLocation.target.latitude;
     }
 
-    return currentPosition!.latitude;
+    return _selectedLocation!.latitude;
   }
 
   getCurrentLong() {
-    if (currentPosition == null) {
-      return kGooglePlex.target.longitude;
+    if (_selectedLocation == null) {
+      return initialLocation.target.longitude;
     }
 
-    return currentPosition!.longitude;
+    return _selectedLocation!.longitude;
   }
 
   void dispose() {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/routes.dart';
 
 class CustomerLoginPage extends StatefulWidget {
   const CustomerLoginPage({super.key});
@@ -26,28 +27,27 @@ class _CustomerLoginPageState extends State<CustomerLoginPage> {
               decoration: const InputDecoration(
                 hintText: "Email",
               ),
-              onChanged: (e) => email = e,
+              onChanged: (e) => email = e.trim(),
             ),
             TextField(
               decoration: const InputDecoration(
                 hintText: "Password",
               ),
-              onChanged: (e) => password = e,
+              onChanged: (e) => password = e.trim(),
             ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
-                // if (mounted) {
-                //   Navigator.pushReplacementNamed(context, Routes.homeRoute);
-                // }
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.customerHomeRoute, (route) => false);
               },
               child: const Text("Login"),
             ),
             const SizedBox(height: 40),
             OutlinedButton(
               onPressed: () {
-                // Navigator.of(context)
-                //     .pushReplacementNamed(Routes.signUpRoute);
+                Navigator.of(context)
+                    .pushReplacementNamed(Routes.customerSignUpRoute);
               },
               child: const Text("Don't have an account? Sign Up"),
             ),

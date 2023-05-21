@@ -17,6 +17,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.1"
+  calendar_view:
+    dependency: "direct main"
+    description:
+      name: calendar_view
+      sha256: "58a8b851ac0a2d62770fd06ad30f06683bd40848a5dd1a1eca332f5a6064bd82"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   characters:
     dependency: transitive
     description:

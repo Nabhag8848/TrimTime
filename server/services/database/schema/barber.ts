@@ -14,4 +14,4 @@ const barberSchema = new Schema({
   },
 });
 
-export default mongoose.model<IBarber>("Barber", barberSchema);
+export const Barber =  mongoose.model<IBarber>("Barber", barberSchema);

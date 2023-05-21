@@ -48,13 +48,9 @@ class _MapsPageState extends State<MapsPage> {
               return GoogleMap(
                 markers: data,
                 onTap: (argument) {
-                  print("Adding Marker");
                   _mapService.addMarker(
                       DateTime.now().toIso8601String(), argument);
                 },
-                myLocationEnabled: true,
-                myLocationButtonEnabled: true,
-                zoomControlsEnabled: true,
                 zoomGesturesEnabled: true,
                 initialCameraPosition: _mapService.initialLocation,
                 onMapCreated: (GoogleMapController controller) {

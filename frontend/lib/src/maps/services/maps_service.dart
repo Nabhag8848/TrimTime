@@ -10,7 +10,7 @@ class MapService {
 
   ValueNotifier<Set<Marker>> markers = ValueNotifier({});
   ValueNotifier<bool> isLoading = ValueNotifier(true);
-  
+
   GoogleMapController? _controller;
   CameraPosition initialLocation = const CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -21,6 +21,7 @@ class MapService {
   MapService(this.context);
 
   MapService.initial(this.context, this.initialLocation);
+  MapService.withMarkers(this.context, this.markers);
 
   initController(GoogleMapController controller) {
     _controller = controller;
@@ -58,11 +59,9 @@ class MapService {
 
     final hasPermission = await _handleLocationPermission();
     isLoading.value = false;
-    print("No permission to get location");
 
     if (!hasPermission) return;
 
-    print("Getting current location");
     var position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
 
